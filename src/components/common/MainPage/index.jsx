@@ -5,14 +5,16 @@ import CallToActionWithVideo from './Heroes'
 import Home from './Features'
 import Milestones from './TimeLine'
 import SmallCentered from './Footer'
+import WithSpeechBubbles from './Testimonials'
 export default function MainPage() {
     return (
         <>
-            <Navbar></Navbar>
-            <CallToActionWithVideo></CallToActionWithVideo>
-            <Home></Home>
-            <Milestones></Milestones>
-            <SmallCentered></SmallCentered>
+            <Navbar/>
+            <CallToActionWithVideo/>
+            <Home/>
+            <Milestones/>
+            <WithSpeechBubbles/>
+            <SmallCentered/>
         </>
 
     )

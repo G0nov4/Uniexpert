@@ -54,8 +54,8 @@ import {
             <Text
               textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
               fontFamily={'heading'}
-              color={useColorModeValue('gray.800', 'white')}>
-              Logo
+              color={useColorModeValue('blue.400', 'white')}>
+              Uniexpert
             </Text>
   
             <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -73,7 +73,8 @@ import {
               fontSize={'sm'}
               fontWeight={400}
               variant={'link'}
-              href={'#'}>
+              href={'/signin'}
+              >
               Sign In
             </Button>
             <Button
@@ -82,10 +83,10 @@ import {
               fontSize={'sm'}
               fontWeight={600}
               color={'white'}
-              bg={'pink.400'}
-              href={'#'}
+              bg={'teal.600'}
+              href={'/signup'}
               _hover={{
-                bg: 'pink.300',
+                bg: 'teal.400',
               }}>
               Sign Up
             </Button>
@@ -247,41 +248,30 @@ import {
   
   const NAV_ITEMS = [
     {
-      label: 'Inspiration',
+      label: 'Eventos',
       children: [
         {
-          label: 'Explore Design Work',
-          subLabel: 'Trending Design to inspire you',
+          label: 'Eventos Actules',
+          subLabel: 'Eventos que aun puedes participar.',
           href: '#',
         },
         {
-          label: 'New & Noteworthy',
-          subLabel: 'Up-and-coming Designers',
+          label: 'Eventos Pasados',
+          subLabel: 'Eventos que ya iniciaron o pasaron.',
           href: '#',
         },
       ],
     },
     {
-      label: 'Find Work',
-      children: [
-        {
-          label: 'Job Board',
-          subLabel: 'Find your dream design job',
-          href: '#',
-        },
-        {
-          label: 'Freelance Projects',
-          subLabel: 'An exclusive list for contract work',
-          href: '#',
-        },
-      ],
+      label: 'Acerca de',
+      href: '#'
     },
     {
-      label: 'Learn Design',
+      label: 'Contactanos',
       href: '#',
     },
     {
-      label: 'Hire Designers',
+      label: 'Blog',
       href: '#',
     },
   ];

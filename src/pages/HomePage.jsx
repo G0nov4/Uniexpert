@@ -8,6 +8,8 @@ import Preloader from '../components/Preloader';
 import MainPage from '../components/common/MainPage';
 
 import { Rutas } from '../routes';
+import SignIn from '../components/auth/SignIn';
+import SignUp from '../components/auth/SignUp';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(true);
@@ -61,6 +63,8 @@ const RouteWithLoader = ({ component: Component, ...rest }) => {
 export default () => (
   <Switch>
     <RouteWithLoader exact path={Rutas.Presentation.path} component={MainPage}/>
+    <RouteWithLoader exact path={Rutas.AuthSignUp.path} component={SignUp}/>
+    <RouteWithLoader exact path={Rutas.AuthSignIn.path} component={SignIn}/>
     {/* <RouteWithLoader exact path={Routes.Presentation.path} component={Presentation} /> */}
 {/*     <RouteWithLoader exact path={Routes.Signin.path} component={Signin} />
     <RouteWithLoader exact path={Routes.Signup.path} component={Signup} />
