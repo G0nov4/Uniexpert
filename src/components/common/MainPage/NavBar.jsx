@@ -22,6 +22,9 @@ import {
     ChevronRightIcon,
   } from '@chakra-ui/icons';
   
+  import { Link as RouterLink} from 'react-router-dom';
+import { Rutas } from '../../../routes';
+
   export default function NavBar() {
     const { isOpen, onToggle } = useDisclosure();
   
@@ -69,22 +72,22 @@ import {
             direction={'row'}
             spacing={6}>
             <Button
-              as={'a'}
+              as={RouterLink}
               fontSize={'sm'}
               fontWeight={400}
               variant={'link'}
-              href={'/signin'}
+              to={'/signin'}
               >
               Sign In
             </Button>
             <Button
-              as={'a'}
+              as={RouterLink}
               display={{ base: 'none', md: 'inline-flex' }}
               fontSize={'sm'}
               fontWeight={600}
               color={'white'}
               bg={'teal.600'}
-              href={'/signup'}
+              to={'/signup'}
               _hover={{
                 bg: 'teal.400',
               }}>
@@ -107,50 +110,59 @@ import {
   
     return (
       <Stack direction={'row'} spacing={4}>
-        {NAV_ITEMS.map((navItem) => (
-          <Box key={navItem.label}>
-            <Popover trigger={'hover'} placement={'bottom-start'}>
-              <PopoverTrigger>
-                <Link
-                  p={2}
-                  href={navItem.href ?? '#'}
-                  fontSize={'sm'}
-                  fontWeight={500}
-                  color={linkColor}
-                  _hover={{
-                    textDecoration: 'none',
-                    color: linkHoverColor,
-                  }}>
-                  {navItem.label}
-                </Link>
-              </PopoverTrigger>
-  
-              {navItem.children && (
-                <PopoverContent
-                  border={0}
-                  boxShadow={'xl'}
-                  bg={popoverContentBgColor}
-                  p={4}
-                  rounded={'xl'}
-                  minW={'sm'}>
-                  <Stack>
-                    {navItem.children.map((child) => (
-                      <DesktopSubNav key={child.label} {...child} />
-                    ))}
-                  </Stack>
-                </PopoverContent>
-              )}
-            </Popover>
-          </Box>
-        ))}
+        {NAV_ITEMS.map((navItem) => 
+          {
+            console.log(navItem)
+            return (
+              <Box key={navItem.label}>
+                <Popover trigger={'hover'} placement={'bottom-start'}>
+                  <PopoverTrigger>
+                    <Link
+                      p={2}
+                      as={RouterLink}
+                      to={navItem.href}
+                      fontSize={'sm'}
+                      fontWeight={500}
+                      color={linkColor}
+                      _hover={{
+                        textDecoration: 'none',
+                        color: linkHoverColor,
+                      }}>
+                      {navItem.label}
+                    </Link>
+                  </PopoverTrigger>
+      
+                  {navItem.children && (
+                    <PopoverContent
+                      border={0}
+                      boxShadow={'xl'}
+                      bg={popoverContentBgColor}
+                      p={4}
+                      rounded={'xl'}
+                      minW={'sm'}>
+                      <Stack>
+                        {navItem.children.map((child) => (
+                          <DesktopSubNav key={child.label} {...child} />
+                        ))}
+                      </Stack>
+                    </PopoverContent>
+                  )}
+                </Popover>
+              </Box>
+            )
+          }
+        )}
       </Stack>
     );
   };
   
   const DesktopSubNav = ({ label, href, subLabel }) => {
+   
     return (
+      
       <Link
-        href={href}
+        as={RouterLink}
+        to={href}
         role={'group'}
         display={'block'}
         p={2}
@@ -201,8 +213,8 @@ import {
       <Stack spacing={4} onClick={children && onToggle}>
         <Flex
           py={2}
-          as={Link}
-          href={href ?? '#'}
+          as={RouterLink}
+          to={href}
           justify={'space-between'}
           align={'center'}
           _hover={{
@@ -234,7 +246,7 @@ import {
             align={'start'}>
             {children &&
               children.map((child) => (
-                <Link key={child.label} py={2} href={child.href}>
+                <Link key={child.label} py={2} as={RouterLink} to={child.href}>
                   {child.label}
                 </Link>
               ))}
@@ -253,25 +265,25 @@ import {
         {
           label: 'Eventos Actules',
           subLabel: 'Eventos que aun puedes participar.',
-          href: '#',
+          href: Rutas.Eventos.actuales.path,
         },
         {
           label: 'Eventos Pasados',
           subLabel: 'Eventos que ya iniciaron o pasaron.',
-          href: '#',
+          href: Rutas.Eventos.pasados.path,
         },
       ],
     },
     {
       label: 'Acerca de',
-      href: '#'
+      href: Rutas.Acerca.path
     },
     {
       label: 'Contactanos',
-      href: '#',
+      href: Rutas.Contacto.path
     },
     {
       label: 'Blog',
-      href: '#',
+      href: Rutas.Blog.path
     },
   ];

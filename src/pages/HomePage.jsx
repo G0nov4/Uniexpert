@@ -2,15 +2,35 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch, } from "react-router-dom";
 
 
-import Login from "../components/auth/Login"
-import Main from './Main';
+
 import Preloader from '../components/Preloader';
 import MainPage from '../components/common/MainPage';
 
 import { Rutas } from '../routes';
 import SignIn from '../components/auth/SignIn';
 import SignUp from '../components/auth/SignUp';
+import Contactanos from './Contactanos';
+import Blog from './Blog';
+import AcercaDe from './AcercaDe';
+import EventosActuales from './events/EventosActuales';
+import EventosPasados from './events/EventosPasados';
 
+
+
+import NavBar from '../components/common/MainPage/NavBar';
+
+const RouteWithLoaderAndNav = ({ component: Component, ...rest }) => {
+  const [loaded, setLoaded] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoaded(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <Route {...rest} render={props => ( <>  <NavBar/> {loaded? <Preloader/> : <Component {...props} /> }</> ) } />
+  );
+};
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(true);
 
@@ -24,7 +44,7 @@ const RouteWithLoader = ({ component: Component, ...rest }) => {
   );
 };
 
-/* const RouteWithSidebar = ({ component: Component, ...rest }) => {
+const RouteWithSidebar = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -58,13 +78,18 @@ const RouteWithLoader = ({ component: Component, ...rest }) => {
     )}
     />
   );
-}; */
+}; 
 
 export default () => (
   <Switch>
-    <RouteWithLoader exact path={Rutas.Presentation.path} component={MainPage}/>
+    <RouteWithLoaderAndNav exact path={Rutas.Presentation.path} component={MainPage}/>
     <RouteWithLoader exact path={Rutas.AuthSignUp.path} component={SignUp}/>
     <RouteWithLoader exact path={Rutas.AuthSignIn.path} component={SignIn}/>
+    <RouteWithLoaderAndNav exact path={Rutas.Eventos.actuales.path} component={EventosActuales}/>
+    <RouteWithLoaderAndNav exact path={Rutas.Eventos.pasados.path} component={EventosPasados}/>
+    <RouteWithLoaderAndNav exact path={Rutas.Acerca.path} component={AcercaDe}/>
+    <RouteWithLoaderAndNav exact path={Rutas.Contacto.path} component={Contactanos}/>
+    <RouteWithLoaderAndNav exact path={Rutas.Blog.path} component={Blog}/>
     {/* <RouteWithLoader exact path={Routes.Presentation.path} component={Presentation} /> */}
 {/*     <RouteWithLoader exact path={Routes.Signin.path} component={Signin} />
     <RouteWithLoader exact path={Routes.Signup.path} component={Signup} />

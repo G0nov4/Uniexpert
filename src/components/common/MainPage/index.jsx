@@ -9,7 +9,6 @@ import WithSpeechBubbles from './Testimonials'
 export default function MainPage() {
     return (
         <>
-            <Navbar/>
             <CallToActionWithVideo/>
             <Home/>
             <Milestones/>
